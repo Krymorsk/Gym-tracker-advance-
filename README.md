@@ -1,20 +1,22 @@
 # FORM — Exercise Tracker
 
-A clean, offline-first exercise tracker built with vanilla HTML, CSS and JavaScript.
+A stylish, offline-first personal fitness dashboard built with vanilla HTML, CSS and JavaScript.
 
-## Features
-- Dashboard with 7-day activity score
-- Gym / home / cardio workout logging
-- Duration, location, exercises/machines and notes
-- Meal logging with calories, protein and water
+## Included
+- Dashboard with weekly goal score, streaks and daily focus
+- Workout / gym / home / cardio logs with duration, location, exercises and RPE
+- Nutrition logs with calories, protein and water targets
+- Weight history and trend chart
 - BMI calculator
-- Weight history + trend chart
-- Personal best / strength tracking
-- Goal weight and calorie/protein targets
-- Responsive mobile layout
-- LocalStorage persistence — no backend required
+- Personal bests and comeback tracking (push-ups, L-sit, pulling strength)
+- Sleep and daily-step tracking
+- Waist / chest / arm / thigh measurements
+- Goal / milestone tracker
+- Local progress photos stored in the browser
+- Responsive desktop + mobile UI with colorful styling
+- LocalStorage persistence and legacy V1/V2 migration
 
 ## Run
-Open `index.html` in a modern browser.
+Open `index.html` with Live Server or any local web server.
 
-All data stays in the browser's LocalStorage.
+No backend or external dependencies are required.
