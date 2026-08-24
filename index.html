@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101828">
+<title>FORM — Exercise Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">F</div><div><strong>FORM</strong><span>Exercise Tracker</span></div></div>
+    <nav>
+      <button class="nav-item active" data-section="dashboard"><span class="nav-ico">⌂</span><span>Dashboard</span></button>
+      <button class="nav-item" data-section="workouts"><span class="nav-ico">◉</span><span>Workouts</span></button>
+      <button class="nav-item" data-section="nutrition"><span class="nav-ico">◒</span><span>Nutrition</span></button>
+      <button class="nav-item" data-section="progress"><span class="nav-ico">↗</span><span>Progress</span></button>
+      <button class="nav-item" data-section="profile"><span class="nav-ico">⚙</span><span>Profile</span></button>
+    </nav>
+    <div class="sidebar-tip"><span>Consistency beats intensity.</span><small>Keep showing up.</small></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><p class="eyebrow" id="todayLabel"></p><h1 id="pageTitle">Dashboard</h1></div>
+      <button class="primary-btn" id="quickLogBtn">+ Log workout</button>
+    </header>
+
+    <section id="dashboard" class="page-section active">
+      <div class="hero-card">
+        <div><p class="eyebrow light">TODAY</p><h2 id="dashboardGreeting">Build the version of you you want.</h2><p class="muted-light" id="dashboardSub">Track the small wins. They add up.</p></div>
+        <div class="hero-ring"><div><strong id="weekScore">0%</strong><span>weekly goal</span></div></div>
+      </div>
+
+      <div class="quick-strip">
+        <div class="quick-pill blue"><span>🔥</span><div><small>Consistency</small><strong id="dashConsistency">0%</strong></div></div>
+        <div class="quick-pill purple"><span>💪</span><div><small>Best streak</small><strong id="dashStreak">0 days</strong></div></div>
+        <div class="quick-pill mint"><span>💧</span><div><small>Water today</small><strong id="dashWater">0 glasses</strong></div></div>
+        <div class="quick-pill peach"><span>🥩</span><div><small>Protein today</small><strong id="dashProtein">0g</strong></div></div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card"><span class="stat-icon">🏋️</span><div><span>Gym visits</span><strong id="gymVisits">0</strong></div><small id="gymVisitsSub">this month</small></article>
+        <article class="stat-card"><span class="stat-icon">⏱️</span><div><span>Gym time</span><strong id="gymTime">0h</strong></div><small>this month</small></article>
+        <article class="stat-card"><span class="stat-icon">⚖️</span><div><span>Current weight</span><strong id="currentWeight">—</strong></div><small id="weightChange">Set your weight</small></article>
+        <article class="stat-card"><span class="stat-icon">📏</span><div><span>BMI</span><strong id="bmiValue">—</strong></div><small id="bmiLabel">Add height + weight</small></article>
+      </div>
+
+      <article class="card focus-card"><div><p class="eyebrow">TODAY'S FOCUS</p><h3 id="focusTitle">Build the habit, not the perfect workout.</h3><p id="focusText">A short session still counts. Show up, log it, and keep the streak alive.</p></div><div class="focus-badge" id="focusBadge">READY</div></article>
+
+      <div class="two-col">
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">RECENT</p><h3>Latest workouts</h3></div><button class="text-btn" data-go="workouts">View all</button></div><div id="recentWorkouts" class="list"></div></article>
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">NUTRITION</p><h3>What you ate</h3></div><button class="text-btn" data-go="nutrition">Add meal</button></div><div id="recentMeals" class="list"></div></article>
+      </div>
+
+      <article class="card"><div class="card-heading"><div><p class="eyebrow">CONSISTENCY</p><h3>Last 7 days</h3></div><span id="streakText" class="badge">No streak yet</span></div><div id="weekGrid" class="week-grid"></div></article>
+    </section>
+
+    <section id="workouts" class="page-section">
+      <div class="section-intro"><div><p class="eyebrow">TRAINING LOG</p><h2>Workouts</h2><p>Record sessions, machines, intensity and notes.</p></div><button class="primary-btn" id="addWorkoutBtn">+ Add workout</button></div>
+      <div class="stats-grid mini-stats">
+        <article class="stat-card"><span class="stat-icon">📅</span><div><span>This week</span><strong id="workoutWeekCount">0</strong></div><small>sessions</small></article>
+        <article class="stat-card"><span class="stat-icon">⏱️</span><div><span>This week</span><strong id="workoutWeekTime">0h</strong></div><small>training time</small></article>
+        <article class="stat-card"><span class="stat-icon">🔥</span><div><span>Current streak</span><strong id="workoutStreak">0</strong></div><small>days</small></article>
+        <article class="stat-card"><span class="stat-icon">🎯</span><div><span>Weekly goal</span><strong id="workoutGoalProgress">0%</strong></div><small>target</small></article>
+      </div>
+      <div class="filter-row"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="gym">Gym</button><button class="filter" data-filter="home">Home</button><button class="filter" data-filter="cardio">Cardio</button></div>
+      <div id="workoutList" class="record-grid"></div>
+    </section>
+
+    <section id="nutrition" class="page-section">
+      <div class="section-intro"><div><p class="eyebrow">FOOD LOG</p><h2>Nutrition</h2><p>Keep an honest record of meals, protein, calories and water.</p></div><button class="primary-btn" id="addMealBtn">+ Add meal</button></div>
+      <div class="stats-grid nutrition-stats">
+        <article class="stat-card"><span class="stat-icon">🔥</span><div><span>Calories today</span><strong id="dayCalories">0</strong></div><small id="calTargetLabel">target —</small></article>
+        <article class="stat-card"><span class="stat-icon">🥩</span><div><span>Protein today</span><strong id="dayProtein">0g</strong></div><small id="proteinTargetLabel">target —</small></article>
+        <article class="stat-card"><span class="stat-icon">💧</span><div><span>Water today</span><strong id="dayWater">0</strong></div><small id="waterTargetLabel">target 8</small></article>
+        <article class="stat-card"><span class="stat-icon">🍽️</span><div><span>Meals today</span><strong id="dayMeals">0</strong></div><small>logged</small></article>
+      </div>
+      <div id="nutritionInsights" class="insight-grid"></div>
+      <div id="mealList" class="record-grid"></div>
+    </section>
+
+    <section id="progress" class="page-section">
+      <div class="section-intro"><div><p class="eyebrow">YOUR TREND</p><h2>Progress</h2><p>See whether your body, strength and consistency are moving in the right direction.</p></div><button class="primary-btn" id="addProgressBtn">+ Add weigh-in</button></div>
+      <div class="progress-overview">
+        <article class="overview-card blue"><span>Starting</span><strong id="progressStart">—</strong><small>first weigh-in</small></article>
+        <article class="overview-card purple"><span>Current</span><strong id="progressCurrent">—</strong><small>latest weight</small></article>
+        <article class="overview-card mint"><span>Goal</span><strong id="progressGoal">—</strong><small>target weight</small></article>
+        <article class="overview-card peach"><span>Change</span><strong id="progressChange">—</strong><small>since first weigh-in</small></article>
+      </div>
+      <div class="progress-panel card"><div class="progress-header"><div><span>Weight trend</span><strong id="progressSummary">No weigh-ins yet</strong></div><select id="progressRange"><option value="all">All time</option><option value="30">30 days</option><option value="90">90 days</option></select></div><canvas id="weightChart"></canvas></div>
+      <div class="two-col">
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">EXERCISE PROGRESS</p><h3>Latest performance</h3></div></div><div id="exerciseProgressList" class="list"></div></article>
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">STRENGTH</p><h3>Personal bests</h3></div><button class="text-btn" id="addStrengthBtn">Add</button></div><div id="strengthList" class="list"></div></article>
+      </div>
+      <div class="two-col">
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">COMEBACK MODE</p><h3>Strength rebuild</h3></div></div><div id="comebackList" class="list"></div></article>
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">RECOVERY</p><h3>Sleep & activity</h3></div></div><div class="recovery-actions"><button class="soft-btn" id="logSleepBtn">🌙 Log sleep</button><button class="soft-btn" id="logStepsBtn">👟 Log steps</button></div><div id="recoverySummary" class="recovery-summary"></div></article>
+      </div>
+      <div class="two-col">
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">BODY STATS</p><h3>Measurements</h3></div><button class="text-btn" id="addMeasurementBtn">Add</button></div><div id="measurementSummary" class="measurements"></div></article>
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">MILESTONES</p><h3>Your goals</h3></div><button class="text-btn" id="addGoalBtn">Add</button></div><div id="goalList" class="goal-list"></div></article>
+      </div>
+      <div class="two-col">
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">PROGRESS PHOTOS</p><h3>Visual check-in</h3></div><button class="text-btn" id="addPhotoBtn">Add</button></div><div id="photoList" class="photo-grid"></div></article>
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">QUICK WIN</p><h3>Today's training check</h3></div></div><div class="check-in"><div><strong id="todayCheckTitle">Have you trained today?</strong><small id="todayCheckText">Log a workout to mark today complete.</small></div><button class="primary-btn" id="todayCheckBtn">Log it</button></div></article>
+      </div>
+    </section>
+
+    <section id="profile" class="page-section">
+      <div class="section-intro"><div><p class="eyebrow">BODY + GOALS</p><h2>Profile</h2><p>Your base numbers power your BMI, goals and progress calculations.</p></div></div>
+      <div class="profile-grid">
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">BASICS</p><h3>Body stats & targets</h3></div></div>
+          <form id="profileForm" class="form-grid">
+            <label>Name<input id="profileName" type="text" placeholder="Your name"></label>
+            <label>Height (cm)<input id="profileHeight" type="number" min="80" max="250" step="0.1" placeholder="180"></label>
+            <label>Current weight (kg)<input id="profileWeight" type="number" min="20" max="300" step="0.1" placeholder="90"></label>
+            <label>Goal weight (kg)<input id="profileGoalWeight" type="number" min="20" max="300" step="0.1" placeholder="80"></label>
+            <label>Daily calorie target<input id="profileCalories" type="number" min="500" max="10000" step="50" placeholder="2200"></label>
+            <label>Daily protein target (g)<input id="profileProtein" type="number" min="0" max="500" step="1" placeholder="150"></label>
+            <label>Daily water target (glasses)<input id="profileWater" type="number" min="1" max="30" step="1" placeholder="8"></label>
+            <label>Daily step target<input id="profileSteps" type="number" min="1000" max="50000" step="500" placeholder="8000"></label>
+            <label>Weekly gym target<input id="profileGymTarget" type="number" min="1" max="14" step="1" placeholder="3"></label>
+            <div class="form-actions"><button class="primary-btn" type="submit">Save profile</button><button class="ghost-btn" type="button" id="resetDataBtn">Reset all data</button></div>
+          </form>
+        </article>
+        <article class="card"><div class="card-heading"><div><p class="eyebrow">BMI</p><h3>Body mass index</h3></div></div><div class="bmi-display"><strong id="profileBmi">—</strong><span id="profileBmiLabel">Enter height and weight</span></div><div class="bmi-scale"><span>Under</span><span>Healthy</span><span>Over</span><span>High</span></div><div class="goal-card"><span>Goal</span><strong id="goalDisplay">—</strong><small id="goalMessage">Set a goal weight in your profile.</small></div></article>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- dialogs -->
+<dialog id="workoutModal"><form method="dialog" id="workoutForm" class="modal-form"><div class="modal-head"><h3>Log workout</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid">
+<label>Date<input id="workoutDate" type="date" required></label><label>Type<select id="workoutType"><option value="gym">Gym</option><option value="home">Home</option><option value="cardio">Cardio</option></select></label><label>Duration (minutes)<input id="workoutDuration" type="number" min="1" max="600" required></label><label>Intensity / RPE (1–10)<input id="workoutIntensity" type="number" min="1" max="10" step="1" placeholder="7"></label><label>Location / gym<input id="workoutLocation" type="text" placeholder="e.g. Gold's Gym"></label><div class="full exercise-builder"><div class="builder-head"><span>Exercises / machines</span><button type="button" class="text-btn" id="addExerciseBtn">+ Add exercise</button></div><div id="exerciseRows"></div><div class="builder-hint">Track sets, reps and weight so the app can show strength progression later.</div></div><label class="full">Notes<textarea id="workoutNotes" rows="2" placeholder="Energy, reps, sets, how you felt..."></textarea></label>
+</div><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save workout</button></div></form></dialog>
+
+<dialog id="mealModal"><form method="dialog" id="mealForm" class="modal-form"><div class="modal-head"><h3>Log meal</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid">
+<label>Date<input id="mealDate" type="date" required></label><label>Meal<select id="mealType"><option>Breakfast</option><option>Lunch</option><option>Snack</option><option>Dinner</option></select></label><label>Calories<input id="mealCalories" type="number" min="0" step="1" placeholder="600"></label><label>Protein (g)<input id="mealProtein" type="number" min="0" step="1" placeholder="35"></label><label>Water (glasses)<input id="mealWater" type="number" min="0" step="1" placeholder="1"></label><label class="full">What did you eat?<textarea id="mealFood" rows="3" placeholder="Rice, chicken, vegetables..."></textarea></label>
+</div><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save meal</button></div></form></dialog>
+
+<dialog id="progressModal"><form method="dialog" id="progressForm" class="modal-form"><div class="modal-head"><h3>Add weigh-in</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid"><label>Date<input id="progressDate" type="date" required></label><label>Weight (kg)<input id="progressWeight" type="number" min="20" max="300" step="0.1" required></label><label class="full">Note<textarea id="progressNote" rows="2" placeholder="Morning, before breakfast..."></textarea></label></div><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save weigh-in</button></div></form></dialog>
+
+<dialog id="strengthModal"><form method="dialog" id="strengthForm" class="modal-form"><div class="modal-head"><h3>Add personal best</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid"><label>Exercise<input id="strengthExercise" type="text" required placeholder="Bench press / push-ups / L-sit"></label><label>Best result<input id="strengthResult" type="text" required placeholder="60 kg × 5 / 10 reps / 20 sec"></label><label>Date<input id="strengthDate" type="date" required></label></div><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save PB</button></div></form></dialog>
+
+<dialog id="sleepModal"><form method="dialog" id="sleepForm" class="modal-form"><div class="modal-head"><h3>Log sleep</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid"><label>Date<input id="sleepDate" type="date" required></label><label>Hours slept<input id="sleepHours" type="number" min="0" max="24" step="0.1" required placeholder="7.5"></label><label>Quality<select id="sleepQuality"><option>Good</option><option>Okay</option><option>Poor</option></select></label><label class="full">Note<textarea id="sleepNote" rows="2" placeholder="Sleep quality, wake-ups..."></textarea></label></div><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save</button></div></form></dialog>
+
+<dialog id="stepsModal"><form method="dialog" id="stepsForm" class="modal-form"><div class="modal-head"><h3>Log steps</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid"><label>Date<input id="stepsDate" type="date" required></label><label>Steps<input id="stepsValue" type="number" min="0" max="100000" step="100" required placeholder="8000"></label><label class="full">Note<textarea id="stepsNote" rows="2" placeholder="Walk, commute, treadmill..."></textarea></label></div><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save</button></div></form></dialog>
+
+<dialog id="measurementModal"><form method="dialog" id="measurementForm" class="modal-form"><div class="modal-head"><h3>Body measurements</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid"><label>Date<input id="measurementDate" type="date" required></label><label>Waist (cm)<input id="measurementWaist" type="number" min="1" step="0.1" placeholder="100"></label><label>Chest (cm)<input id="measurementChest" type="number" min="1" step="0.1" placeholder="110"></label><label>Arm (cm)<input id="measurementArm" type="number" min="1" step="0.1" placeholder="38"></label><label>Thigh (cm)<input id="measurementThigh" type="number" min="1" step="0.1" placeholder="60"></label><label class="full">Note<textarea id="measurementNote" rows="2" placeholder="Relaxed measurement, same conditions each time..."></textarea></label></div><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save measurement</button></div></form></dialog>
+
+<dialog id="goalModal"><form method="dialog" id="goalForm" class="modal-form"><div class="modal-head"><h3>Add milestone</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid"><label class="full">Goal<input id="goalTitle" type="text" required placeholder="10 proper push-ups"></label><label>Target<input id="goalTarget" type="text" placeholder="10 reps"></label><label>Deadline<input id="goalDeadline" type="date"></label></div><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save goal</button></div></form></dialog>
+
+<dialog id="photoModal"><form method="dialog" id="photoForm" class="modal-form"><div class="modal-head"><h3>Progress photo</h3><button type="button" class="icon-btn" data-close>×</button></div><div class="form-grid"><label>Date<input id="photoDate" type="date" required></label><label>Label<input id="photoLabel" type="text" placeholder="Front · Week 1"></label><label class="full">Photo<input id="photoFile" type="file" accept="image/*" required></label></div><p class="modal-hint">Photos stay in your browser's local storage and are never uploaded anywhere by this app.</p><div class="modal-actions"><button type="button" class="ghost-btn" data-close>Cancel</button><button class="primary-btn">Save photo</button></div></form></dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
